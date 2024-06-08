@@ -1,15 +1,56 @@
 body{
-    margin: 0;
     padding: 0;
     width: 100%;
-    height: 1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
 }
 
 
-.countContainerElem{
-    width: 200px;
+.allContainerElem{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    background-color: cornflowerblue;
+    padding:15px;
+    gap: 10px;
+    border-radius: 6px;
+}
+
+.countContainer{
     display: flex;
     flex-direction: column;
-    text-align: center;
-    align-items: center;
+    gap: 10px;
+}
+
+.settingsCountContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.buttonCount{
+    width: 100px;
+    padding: 5px;
+    background-color: rgba(24, 47, 89, 0.79);
+    color: white;
+    border: 1px solid rgba(24, 47, 89, 0.79);
+    border-radius: 6px;
+}
+
+.count{
+    font-size: 50px;
+    color: white;
+}
+
+
+.buttonCountBlocked{
+    background-color: rgba(23, 35, 56, 0.79);
+    color: #bbbbbb;
+    border: 1px solid rgba(23, 35, 56, 0.79);
+}
+
+.inputCount{
+    width: 90px;
 }

@@ -18,27 +18,28 @@ function App(){
         setCount(0)
     }
 
+
     return(
         <>
 
-            <div>
-                <div>
-                    <span>{count}</span>
+            <div className={"allContainerElem"}>
+                <div className={"countContainer"}>
+                    <span className={"count"}>{count}</span>
                     <div>
-                        <button onClick={resetCount}>res</button>
-                        <button onClick={addToCount}>+</button>
+                        <button onClick={resetCount} className={"buttonCount"}>res</button>
+                        <button onClick={addToCount} disabled={count>=startMaxValue} className={"buttonCount"}>+</button>
                     </div>
                 </div>
-                <div>
-                    <input type={"number"} placeholder={"max value"} value={startMaxValue} onChange={(e) => {
+                <div className={"settingsCountContainer"}>
+                    <input  className={"inputCount buttonCount"} type={"number"} placeholder={"max value"} value={startMaxValue} onChange={(e) => {
                         setvalue(Number(e.currentTarget.value))
                         console.log(e.currentTarget.value)
                     }}/>
-                    <input type={"number"} placeholder={"step value"} value={startStepValue} onChange={(e) => {
+                    <input className={"inputCount buttonCount"} type={"number"} placeholder={"step value"} value={startStepValue} onChange={(e) => {
                         setStepvalue(Number(e.currentTarget.value))
                         console.log(e.currentTarget.value)
                     }}/>
-                    <button onClick={addToCount}>save</button>
+                    <button className={"buttonCount"}>save</button>
                 </div>
             </div>
         </>

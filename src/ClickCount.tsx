@@ -3,15 +3,26 @@ import {useState} from "react";
 function App(){
     const [count, setCount] = useState<number>(0)
 
-    const[startMaxValue,setvalue]=useState<number>(5)
-    const[startStepValue,setStepvalue]=useState<number>(1)
+    const[startMaxValue,setvalue]=useState<number>(0)
+    const[startStepValue,setStepvalue]=useState<number>(0)
 
+    const [settings, setSettings]=useState<{maxValue:number, stepValue:number}|undefined>(undefined)
 
+    function saveSettings(){
+        setSettings({maxValue: startMaxValue, stepValue:startStepValue})
+    }
 
     function addToCount(){
-            if(count<startMaxValue){
-                setCount(count+startStepValue)
+        console.log(settings)
+        if(!settings){
+            setCount(count+1)
+        }
+        else {
+            if(startMaxValue<count){
+                setCount(count+settings.stepValue)
             }
+
+        }
     }
 
     function resetCount(){
@@ -27,7 +38,7 @@ function App(){
                     <span className={"count"}>{count}</span>
                     <div>
                         <button onClick={resetCount} className={"buttonCount"}>res</button>
-                        <button onClick={addToCount} disabled={count>=startMaxValue} className={"buttonCount"}>+</button>
+                        <button onClick={addToCount} className={"buttonCount"}>+</button>
                     </div>
                 </div>
                 <div className={"settingsCountContainer"}>
@@ -39,7 +50,7 @@ function App(){
                         setStepvalue(Number(e.currentTarget.value))
                         console.log(e.currentTarget.value)
                     }}/>
-                    <button className={"buttonCount"}>save</button>
+                    <button className={"buttonCount"} onClick={saveSettings}>save</button>
                 </div>
             </div>
         </>

@@ -18,7 +18,7 @@ function App(){
             setCount(count+1)
         }
         else {
-            if(startMaxValue<count){
+            if(settings.maxValue>count && settings.stepValue+count<=settings.maxValue){
                 setCount(count+settings.stepValue)
             }
 
@@ -36,6 +36,7 @@ function App(){
             <div className={"allContainerElem"}>
                 <div className={"countContainer"}>
                     <span className={"count"}>{count}</span>
+                    {/*сделать класс на изменения цвета*/}
                     <div>
                         <button onClick={resetCount} className={"buttonCount"}>res</button>
                         <button onClick={addToCount} className={"buttonCount"}>+</button>

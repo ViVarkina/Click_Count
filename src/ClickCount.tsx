@@ -1,44 +1,48 @@
 import './App.css'
 import {useState} from "react";
 import css from "./ClickCount.module.css"
+import {BaseModalWindow} from "./ModalWindow.tsx";
+
 // import clsx from 'clsx';
-function App(){
+function App() {
     const [count, setCount] = useState<number>(0)
 
-    const[startMaxValue,setvalue]=useState<number>(0)
-    const[startStepValue,setStepvalue]=useState<number>(0)
+    const [startMaxValue, setvalue] = useState<number>(0)
+    const [startStepValue, setStepvalue] = useState<number>(0)
+
+    const [openModal, setOpen] = useState<boolean>(false)
 
 
-    const [settings, setSettings]=useState<{maxValue:number, stepValue:number}|undefined>(undefined)
+    const [settings, setSettings] = useState<{ maxValue: number, stepValue: number } | undefined>(undefined)
 
-    function saveSettings(){
-        setSettings({maxValue: startMaxValue, stepValue:startStepValue})
+    function saveSettings() {
+        setSettings({maxValue: startMaxValue, stepValue: startStepValue})
     }
 
-    function addToCount(){
-        if(!settings){
-            setCount(count+1)
-        }
-        else {
-            if(settings.maxValue>count && settings.stepValue+count<=settings.maxValue){
-                setCount(count+settings.stepValue)
-            }
-            else{
-                alert("Шаг больше чем значение, больше мы прибавить не сможем")
+    function addToCount() {
+        if (!settings) {
+            setCount(count + 1)
+        } else {
+            if (settings.maxValue > count && settings.stepValue + count <= settings.maxValue) {
+                setCount(count + settings.stepValue)
+            } else {
+                // alert("stop")
+                setOpen(true)
             }
         }
     }
 
-    function resetCount(){
+    function resetCount() {
         setCount(0)
+        setOpen(false)
     }
 
 
-    return(
+    return (
         <>
             <div className={css.allContainerElem}>
                 <div className={css.countContainer}>
-                    <span className={settings?.maxValue<=count ?css.countRed :css.count}>{count}</span>
+                    <span className={settings?.maxValue <= count ? css.countRed : css.count}>{count}</span>
                     <div>
                         <button onClick={resetCount} className={css.buttonCount}>res</button>
                         <button onClick={addToCount} className={css.buttonCount}>+</button>
@@ -57,6 +61,11 @@ function App(){
                     }}/>
                     <button className={css.buttonCount} onClick={saveSettings}>save</button>
                 </div>
+                {openModal &&
+                    <BaseModalWindow className={css.modalWindow} onCansel={()=>setOpen(false)} onOk={()=>setOpen(true)}>
+                        Modal open
+                    </BaseModalWindow>
+                }
             </div>
         </>
     )
